@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Push Your Luck Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="main-menu">
+        <h1>Push Your Luck Game</h1>
+        <button id="start-game">Start Game</button>
+        <button id="character-select">Character Select</button>
+        <button id="skins-shop">Skins Shop</button>
+        <button id="stats-screen">Stats</button>
+    </div>
+
+    <div id="character-select" style="display:none;">
+        <h2>Select Your Character</h2>
+        <button class="character" data-character="warrior">Warrior</button>
+        <button class="character" data-character="mage">Mage</button>
+        <button class="character" data-character="rogue">Rogue</button>
+        <button id="back-to-menu">Back</button>
+    </div>
+
+    <div id="skins-shop" style="display:none;">
+        <h2>Select Your Skin</h2>
+        <div class="skin" data-skin="default">Default Skin</div>
+        <div class="skin" data-skin="fire">Fire Skin</div>
+        <div class="skin" data-skin="ice">Ice Skin</div>
+        <button id="back-to-menu-from-skins">Back</button>
+    </div>
+
+    <div id="game-screen" style="display:none;">
+        <h2>Game Screen</h2>
+        <p id="game-instructions">Instructions: ...</p>
+        <button id="play">Play</button>
+        <button id="quit">Quit Game</button>
+    </div>
+
+    <div id="stats-screen" style="display:none;">
+        <h2>Your Stats</h2>
+        <p id="stats"></p>
+        <button id="back-to-menu-from-stats">Back</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
