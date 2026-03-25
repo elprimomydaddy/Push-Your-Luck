@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.button {
+  background-color: #1E90FF;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 10px;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #0E76A8;
+}
+
+.rank-bronze {
+  background-color: #C27BA0;
+}
+
+.rank-silver {
+  background-color: #A6D8E4;
+}
+
+.rank-gold {
+  background-color: #F1C232;
+}
+
+.rank-platinum {
+  background-color: #A2C2E0;
+}
+
+.rank-diamond {
+  background-color: #2B8A3A;
+}
+
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.pulse {
+  animation: pulse 1s infinite;
+}
