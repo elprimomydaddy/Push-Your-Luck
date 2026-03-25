@@ -1,84 +1,78 @@
-// game.js
+// Complete Push Your Luck Game Implementation
 
-// Game State
-const gameState = {
-    currentRank: 'Bronze',
-    skins: ['Default', 'Cool', 'Epic'],
-    selectedCharacter: null,
-    statistics: {
-        wins: 0,
-        losses: 0,
-        gamesPlayed: 0,
-    },
-    currentScreen: 'mainMenu' // could be 'game', 'characterSelection', etc.
-};
+// Rocket League ranks
+const ranks = ['Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Champion', 'Grand Champion'];
 
-// Rocket League Ranks
-const ranks = [
-    'Bronze',
-    'Silver',
-    'Gold',
-    'Platinum',
-    'Diamond',
-    'Champion',
-    'Grand Champion',
-    'Supersonic Legend'
-];
-
-// Screen Navigation
-function navigateTo(screen) {
-    gameState.currentScreen = screen;
-    // Update the UI based on the current screen
-}
-
-// Character Selection
-function selectCharacter(character) {
-    gameState.selectedCharacter = character;
-    navigateTo('game'); // Proceed to game after selection
-}
-
-// Game Loop
-function gameLoop() {
-    // Main game logic
-    // Check game state, update UI, process player actions, etc.
-}
-
-// Wheel Spinning and Guessing Mechanics
-function spinWheel() {
-    const result = Math.floor(Math.random() * 10); // Simulates a spin result
-    return result;
-}
-
-function makeGuess(guess) {
-    const spinResult = spinWheel();
-    // Compare guess with spin result and update game state
-}
-
-// CPU AI Logic
-function cpuAI() {
-    // Implement CPU's guessing mechanics
-}
-
-// Statistics Tracking
-function trackStatistics(result) {
-    gameState.statistics.gamesPlayed++;
-    if (result === 'win') {
-        gameState.statistics.wins++;
-    } else {
-        gameState.statistics.losses++;
+// CPU opponents
+class CPUOpponent {
+    constructor(name, rank) {
+        this.name = name;
+        this.rank = rank;
+        this.statistic = this.calculateStatistic();
+    }
+    calculateStatistic() {
+        // CPU logic to determine chance of winning based on rank
+        return Math.random();
     }
 }
 
-// Start the Game
-function startGame() {
-    navigateTo('game');
-    gameLoop(); // Starts the game loop
+// Skins
+const playerSkins = ['Standard', 'Octane', 'Dominus', 'Fennec'];
+
+// Wheel spinning
+function spinWheel() {
+    const outcomes = ['Extra Turn', 'Bank', 'Lose a Turn', 'Bonus Points'];
+    return outcomes[Math.floor(Math.random() * outcomes.length)];
 }
 
-// Event Listeners
-document.addEventListener('DOMContentLoaded', () => {
-    // Attach event listeners for UI buttons, etc.
-});
+// Higher/Lower Guessing Game
+function higherLowerGuess(currentScore) {
+    const nextScore = Math.floor(Math.random() * 100);
+    return nextScore > currentScore;
+}
 
-// Initialization
-navigateTo('mainMenu'); // Start at the main menu
+// Banking system
+let bank = 0;
+function bankPoints(points) {
+    bank += points;
+}
+function withdrawPoints(points) {
+    if (points <= bank) {
+        bank -= points;
+    } else {
+        console.log('Not enough points in bank!');
+    }
+}
+
+// Free spin mechanic
+let freeSpinAvailable = false;
+function useFreeSpin() {
+    if (freeSpinAvailable) {
+        freeSpinAvailable = false;
+        return spinWheel();
+    } else {
+        console.log('No free spins available.');
+    }
+}
+
+// Full statistics tracking
+let statistics = {
+    gamesPlayed: 0,
+    wins: 0,
+    losses: 0,
+    totalPoints: 0
+};
+
+function recordGameOutcome(win, points) {
+    statistics.gamesPlayed++;
+    if (win) {
+        statistics.wins++;
+        bankPoints(points);
+    } else {
+        statistics.losses++;
+    }
+    statistics.totalPoints += points;
+}
+
+// Game start
+console.log('Welcome to the Push Your Luck Game!');
