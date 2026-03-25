@@ -3,39 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Push Your Luck - Redesigned Game Interface</title>
+    <title>Push Your Luck Game</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Push Your Luck</h1>
-        <nav>
-            <!-- Navigation links here -->
-        </nav>
-    </header>
-    <main>
-        <section id="game-interface">
-            <div class="spinning-wheel">
-                <!-- Spinning wheel component -->
+    <!-- Main Menu -->
+    <div id="mainMenu" class="screen active">
+        <div class="menu-container">
+            <h1>🎮 PUSH YOUR LUCK</h1>
+            <p class="subtitle">Test your luck and win big!</p>
+            <button class="btn btn-primary" onclick="startGameScreen()">Start Game</button>
+            <button class="btn btn-secondary" onclick="showSkins()">Skins Shop</button>
+            <button class="btn btn-secondary" onclick="showStats()">Statistics</button>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="gameScreen" class="screen">
+        <div class="game-container">
+            <div class="game-header">
+                <h2>Round <span id="roundNum">1</span></h2>
+                <button class="btn-back" onclick="backToMenu()">Menu</button>
             </div>
-            <div class="game-controls">
-                <button id="start-game">Start Game</button>
-                <button id="stop-game">Stop Game</button>
+
+            <!-- Spinning Wheel -->
+            <div class="wheel-section">
+                <h3>SPIN THE WHEEL</h3>
+                <div class="wheel" id="wheel">
+                    <div class="wheel-inner">
+                        <span id="wheelNumber">50</span>
+                    </div>
+                </div>
+                <button class="btn btn-spin" id="spinBtn" onclick="spinWheel()">SPIN</button>
+                <p id="wheelStatus">Click SPIN to start</p>
             </div>
-            <div class="statistics-display">
-                <h2>Statistics</h2>
-                <p id="player-score">Score: 0</p>
-                <p id="player-rank">Rank: Unranked</p>
+
+            <!-- Game Controls -->
+            <div class="controls">
+                <div id="guessSection" style="display:none;">
+                    <p>Will the next number be:</p>
+                    <button class="btn btn-higher" onclick="guess('higher')">HIGHER ⬆</button>
+                    <button class="btn btn-lower" onclick="guess('lower')">LOWER ⬇</button>
+                </div>
+                
+                <div id="actionSection" style="display:none;">
+                    <button class="btn btn-bank" onclick="bankPoints()">BANK POINTS 💰</button>
+                    <button class="btn btn-free" id="freeSpinBtn" onclick="freeSpin()">FREE SPIN ⭐</button>
+                </div>
             </div>
-            <div class="skins-shop">
-                <h2>Skins Shop</h2>
-                <!-- Display skins here -->
+
+            <!-- Stats -->
+            <div class="game-stats">
+                <p>Bank: <span id="bankAmount">0</span></p>
+                <p>Score: <span id="score">0</span></p>
             </div>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 El Primo My Daddy</p>
-    </footer>
-    <script src="script.js"></script>
+
+            <!-- Message -->
+            <div class="message" id="message"></div>
+        </div>
+    </div>
+
+    <!-- Skins Shop -->
+    <div id="skinsScreen" class="screen">
+        <div class="container">
+            <h2>🎨 SKINS SHOP</h2>
+            <div class="skins-grid" id="skinsGrid"></div>
+            <button class="btn btn-primary" onclick="backToMenu()">Back</button>
+        </div>
+    </div>
+
+    <!-- Statistics -->
+    <div id="statsScreen" class="screen">
+        <div class="container">
+            <h2>📊 STATISTICS</h2>
+            <div class="stats-box">
+                <p>Games Played: <span id="gamesPlayed">0</span></p>
+                <p>Games Won: <span id="gamesWon">0</span></p>
+                <p>Win Rate: <span id="winRate">0%</span></p>
+                <p>High Score: <span id="highScore">0</span></p>
+            </div>
+            <button class="btn btn-primary" onclick="backToMenu()">Back</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
 </body>
 </html>
